@@ -3,7 +3,36 @@
 
 * {
     font-family: 'Work Sans', sans-serif;
-    color: #131313
+    color: #131313;
+}
+
+.color-1 {
+    color: #23BE0A;
+}
+
+.bg-1 {
+    background: #23BE0A;
+}
+
+.color-2 {
+    color: #59C6D2;
+}
+
+.bg-2 {
+    background: #59C6D2;
+}
+
+.nav-btn-hover {
+    background: white;
+    border: 1px solid white;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-btn-hover:hover {
+    border: 1px solid #23BE0A;
+    color: #23BE0A;
+    font-weight: 500;
 }
 
 .font-playfair {
