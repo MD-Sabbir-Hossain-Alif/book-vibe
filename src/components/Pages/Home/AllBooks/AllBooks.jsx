@@ -11,7 +11,7 @@ const AllBooks = () => {
             <h2 className="text-[2.5rem] font-bold font-playfair text-center mb-9">
                 Books
             </h2>
-            <section className="grid grid-cols-3 gap-6">
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
                 {books.map((book) => (
                     <Book key={book.bookId} book={book}></Book>
                 ))}
