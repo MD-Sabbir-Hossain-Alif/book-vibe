@@ -1,6 +1,15 @@
+import { useContext, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
+import { BooksContext } from "../../../Context/BooksProvider";
+import { toast } from "react-toastify";
 
 const BookDetails = () => {
+    // state and content always declear in the top
+    // const booksContext = useContext(BooksContext);
+    // console.log(booksContext);
+    const [storeBooks, setStoreBooks] = useContext(BooksContext);
+    const [readBtn, setReadBtn] = useState(false);
+
     const params = useParams();
     // console.log(params.bookId);
 
@@ -12,9 +21,9 @@ const BookDetails = () => {
     );
     // console.log(targetedBook);
 
-    if (!targetedBook) {
-        return <p>Book not found</p>;
-    }
+    // if (!targetedBook) {
+    //     return <p>Book not found</p>;
+    // }
 
     const {
         bookName,
@@ -28,6 +37,28 @@ const BookDetails = () => {
         publisher,
         yearOfPublishing,
     } = targetedBook;
+
+    // handle mark as read
+    const handlemMarkAsRead = (book) => {
+        // step:1 store book id or store book object
+        // step:2 where to store (array or collection)
+        // step:3 if the book is already exist then show a aleart or toast
+        // step:4 if not exist in the store/collection list then add to the array
+
+        // console.log(book);
+
+        const isExistBook = storeBooks.find(
+            (item) => item.bookId === book.bookId,
+        );
+        if (isExistBook) {
+            return toast.error(`${book.bookName} has already been added`);
+        } else {
+            setReadBtn(true);
+            setStoreBooks([...storeBooks, book]);
+            toast.success(`${book.bookName} is added to list`);
+        }
+    };
+
     return (
         <div>
             <div className="card lg:card-side bg-base-100 mb-25 justify-between">
@@ -91,7 +122,12 @@ const BookDetails = () => {
                         </div>
                     </div>
                     <div className="card-actions">
-                        <button className="btn btn-outline">Read</button>
+                        <button
+                            onClick={() => handlemMarkAsRead(targetedBook)}
+                            className="btn btn-outline"
+                        >
+                            {readBtn ? "Read" : "Mark as Read"}
+                        </button>
                         <button className="btn btn-info">Wishlist</button>
                     </div>
                 </div>
